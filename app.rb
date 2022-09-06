@@ -12,4 +12,4 @@ end
 
 
 # We need to give the database name to the method `connect`.
-DatabaseConnection.connect('makersbnb')
+DatabaseConnection.connect('makersbnb_test')
