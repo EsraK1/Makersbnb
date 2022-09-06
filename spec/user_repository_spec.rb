@@ -12,6 +12,9 @@ RSpec.describe UserRepository do
     before(:each) do
       reset_makersbnb_test
     end
+    after(:each) do
+        reset_makersbnb_test
+      end
 
   context '#list all users' do
     it "returns a list of all users" do

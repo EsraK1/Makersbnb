@@ -1,5 +1,7 @@
 # file: spec/spec_helper.rb
 
+ENV['ENV'] = 'test'
+
 require 'database_connection'
 
 # Make sure this connects to your test database

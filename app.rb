@@ -3,7 +3,8 @@ require 'sinatra/reloader'
 require_relative 'lib/database_connection'
 require_relative 'lib/property_repository'
 require_relative 'lib/users_repository'
-require_relative 'lib/property.rb'
+require_relative 'lib/property'
+require_relative 'lib/users'
 
 class Application < Sinatra::Base
     # This allows the app code to refresh
@@ -105,20 +106,6 @@ class Application < Sinatra::Base
   get '/properties' do 
     repo = PropertyRepository.new
     @properties = repo.all
-    # return erb(:properties)
-
-    p "=============="
-    p @properties.all
-
-    # p "=============="
-    # p @properties
-
-    # p "=============="
-
-    # p @properties[1].title 
-    # p "=============="
-    # @properties.each do |property|
-    #   property.title
-    # end
+    return erb(:properties)
   end
 end
