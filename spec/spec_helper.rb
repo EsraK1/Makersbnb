@@ -4,7 +4,7 @@ require 'database_connection'
 
 # Make sure this connects to your test database
 # (its name should end with '_test')
-DatabaseConnection.connect('your_database_name_test')
+DatabaseConnection.connect('makersbnb_test')
 
 
 
@@ -36,6 +36,13 @@ RSpec.configure do |config|
     # ...rather than:
     #     # => "be bigger than 2"
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
+  end
+
+  if config.files_to_run.one?
+    # Use the documentation formatter for detailed output,
+    # unless a formatter has already been configured
+    # (e.g. via a command-line flag).
+    config.default_formatter = "doc"
   end
 
   # rspec-mocks config goes here. You can use an alternate test double
