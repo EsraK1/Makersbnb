@@ -23,6 +23,9 @@ describe PropertyRepository do
 
       properties = repo.all
 
+
+p '-------------------------'
+p properties
       expect(properties.length).to eq(2)
 
       expect(properties.first.id).to eq(1)
@@ -36,6 +39,7 @@ describe PropertyRepository do
       expect(properties[1].description).to eq('Escape to a Romantic and Magical Hobbit Retreat')
       expect(properties[1].price_per_night).to eq(90)
       expect(properties[1].user_id).to eq(1)
+
     end
   end
 
