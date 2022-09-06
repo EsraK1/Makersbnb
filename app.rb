@@ -8,8 +8,13 @@ class Application < Sinatra::Base
     configure :development do
         register Sinatra::Reloader
     end
+
+    get '/' do
+        return erb(:index)
+    end
 end
 
 
 # We need to give the database name to the method `connect`.
 DatabaseConnection.connect('makersbnb_test')
+
