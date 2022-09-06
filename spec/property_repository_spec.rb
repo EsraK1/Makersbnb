@@ -3,17 +3,17 @@ require 'property'
 require 'property_repository'
 
 def reset_property_table
-  seed_sql = File.read('spec/properties_seeds.sql')
+  seed_sql = File.read('spec/seeds/properties_seeds.sql')
   connection = PG.connect({ host: '127.0.0.1', dbname: 'makersbnb_test' })
   connection.exec(seed_sql)
 end
 
 describe PropertyRepository do
 
-  before(:each) do 
+  before(:each) do
     reset_property_table
   end
-  after(:each) do 
+  after(:each) do
     reset_property_table
   end
 
@@ -22,7 +22,7 @@ describe PropertyRepository do
       repo = PropertyRepository.new
 
       properties = repo.all
-      
+
       expect(properties.length).to eq(2)
 
       expect(properties.first.id).to eq(1)
