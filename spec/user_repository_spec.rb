@@ -2,19 +2,19 @@ require 'users_repository.rb'
 require 'users.rb'
 
 def reset_makersbnb_test
-    seed_sql = File.read('spec/users_seeds.sql')
+    seed_sql = File.read('spec/seeds/users_seeds.sql')
     connection = PG.connect({ host: '127.0.0.1', dbname: 'makersbnb_test' })
     connection.exec(seed_sql)
 end
 
-RSpec.describe UserRepository do 
-  
-    before(:each) do 
+RSpec.describe UserRepository do
+
+    before(:each) do
       reset_makersbnb_test
     end
-  
-  context '#list all users' do 
-    it "returns a list of all users" do 
+
+  context '#list all users' do
+    it "returns a list of all users" do
         repo = UserRepository.new
 
         users = repo.all
@@ -33,8 +33,8 @@ RSpec.describe UserRepository do
         end
     end
 
-    context '#find a given user' do 
-        it "finds a user record" do 
+    context '#find a given user' do
+        it "finds a user record" do
             repo = UserRepository.new
 
             users = repo.find(1)
@@ -46,12 +46,12 @@ RSpec.describe UserRepository do
         end
     end
 
-    context '#create a single user' do 
-        it "adds a new user record" do 
+    context '#create a single user' do
+        it "adds a new user record" do
             repo = UserRepository.new
 
             new_user = User.new
-            
+
             new_user.username = 'roi'
             new_user.email_address = 'roi@gmail.com'
             new_user.password = 'password123'
@@ -69,8 +69,8 @@ RSpec.describe UserRepository do
         end
     end
 
-    context '#updates a given user' do 
-        it "updates a user record" do 
+    context '#updates a given user' do
+        it "updates a user record" do
             repo = UserRepository.new
 
             user2 = repo.find(2)
@@ -89,8 +89,8 @@ RSpec.describe UserRepository do
         end
     end
 
-    context '#delete a user' do 
-        it "deletes a user record" do 
+    context '#delete a user' do
+        it "deletes a user record" do
             repo = UserRepository.new
 
             repo.delete(2)
