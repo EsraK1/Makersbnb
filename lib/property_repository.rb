@@ -1,4 +1,4 @@
-require "property"
+require_relative 'property.rb'
 
 class PropertyRepository
 
@@ -15,6 +15,8 @@ class PropertyRepository
             new_property.user_id = property["user_id"].to_i
             properties << new_property
         end
+        p "+++++++++++++++++++++++++++++++++++++++++++++"
+p properties
         return properties
     end
 

@@ -1,0 +1,14 @@
+
+<html>
+  <head></head>
+  <body>
+    <h1>Properties</h1>
+    <b>
+    <%= @properties[1].title %>
+    <% @properties.each do |property| %>
+        <%= property.title %></a><br />
+        <%= property.description %></a><br />
+    <% end %></b>
+
+  </body>
+</html>
