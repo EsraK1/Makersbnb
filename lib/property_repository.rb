@@ -1,4 +1,4 @@
-require "property"
+require_relative 'property.rb'
 
 class PropertyRepository
 

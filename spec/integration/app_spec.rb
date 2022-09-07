@@ -1,12 +1,130 @@
 require "spec_helper"
 require "rack/test"
-require_relative '../../app'
+require_relative '../../app.rb'
 
-# describe Application do
-#   # This is so we can use rack-test helper methods.
-#   include Rack::Test::Methods
 
-#   # We need to declare the `app` value by instantiating the Application
-#   # class so our tests work.
-#   let(:app) { Application.new }
-# end
+def reset_property_table
+  seed_sql = File.read('spec/seeds/properties_seeds.sql')
+  connection = PG.connect({ host: '127.0.0.1', dbname: 'makersbnb_test' })
+  connection.exec(seed_sql)
+end
+
+describe Application do
+  # This is so we can use rack-test helper methods.
+  include Rack::Test::Methods
+
+  # We need to declare the `app` value by instantiating the Application
+  # class so our tests work.
+  let(:app) { Application.new }
+
+  before(:each) do
+    reset_property_table
+  end
+  after(:each) do
+    reset_property_table
+  end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  context "GET /properties" do
+    it 'returns all properties' do
+      response = get("/properties")
+
+      expect(response.status).to eq(200)
+      #expect(response.body).to include('Amazing for the weekend')
+      #expect(response.body).to include('Escape to a Romantic and Magical Hobbit Retreat')
+    end
+
+    it 'returns 404 Not Found' do
+      response= get('/listing')
+
+      expect(response.status).to eq(404)
+      # expect(response.body).to eq(expected_response)
+    end
+  end
+end

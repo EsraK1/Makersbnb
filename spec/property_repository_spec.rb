@@ -23,9 +23,6 @@ describe PropertyRepository do
 
       properties = repo.all
 
-
-p '-------------------------'
-p properties
       expect(properties.length).to eq(2)
 
       expect(properties.first.id).to eq(1)
