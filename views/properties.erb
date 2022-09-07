@@ -4,14 +4,12 @@
     <h1>List of properties</h1>
     <p>
       <% @properties.each do |property| %>
-        <%= puts " --- Start of property info --- " %><br>
-        <%= "Property ID: #{property.id}"%><br>
-        <%= "Property: #{property.title}"%><br>
-        <%= "Property description: #{property.description}"%><br>
-        <%= "Property price per night: £#{property.price_per_night}"%><br>
-        <%= "Property owner: #{property.user_id}"%><br>
-        <%=" --- End of property ID: #{property.id} info --- " %><br>
+        <a href="/properties/<%=property.id%>"><%="#{property.title}"%></a><br>
       <% end %></b>
     </p>
   </body>
+  <footer>
+    <a href="/properties/new">Add a new property</a><br>
+    <a href="/">Home</a><br>
+  </footer>
 </html>
