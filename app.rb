@@ -15,17 +15,32 @@ class Application < Sinatra::Base
         also_reload 'lib/users_repository'
     end
 
-      get '/' do
-          return erb(:index)
-      end
+    get '/' do
+        return erb(:index)
+    end
 
 
 # We need to give the database name to the method `connect`.
   DatabaseConnection.connect('makersbnb_test')
 
-      get '/register' do
+    get '/register' do
         return erb(:register_page)
-      end
+    end
+
+    post '/register' do
+        repo = UserRepository.new
+        user = User.new
+
+        user.username = params[:username]
+        user.email_address = params[:email_address]
+        user.password = params[:password]
+
+        repo.create(user)
+
+        return erb(:registration_successful)
+    end
+
+
 
 
 

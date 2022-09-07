@@ -5,7 +5,6 @@
     <%= property.description %></a><br />
 <% end %></b>
 
-<%binding.irb%>
 
 <%= @properties[0].title %>
 
