@@ -5,7 +5,6 @@
     <%= property.description %></a><br />
 <% end %></b>
 
-<%binding.irb%>
 
 <%= @properties[0].title %>
 
@@ -21,6 +20,8 @@
         <% puts @properties[1].title %>
         <% puts "I'm inside erb HTML file" %>
         I go through
+ registration
+
 
 
         ----------- FIRST PROPERTIES WORKING
