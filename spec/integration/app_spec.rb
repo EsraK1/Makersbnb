@@ -30,10 +30,8 @@ describe Application do
       expect(response.body).to include("Register")
       expect(response.body).to include("Sign in")
       expect(response.body).to include("View properties")
-
     end
   end
-end
 
   before(:each) do
     reset_property_table
