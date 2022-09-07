@@ -49,7 +49,7 @@ describe Application do
       expect(response.body).to include("<form method='POST' action='/register'>")
       expect(response.body).to include("<input type='text' name='username'/>")
       expect(response.body).to include("<input type='text' name='email_address'/>")
-      expect(response.body).to include("<input type='text' name='password'/>")
+      expect(response.body).to include("<input type='password' name='password'/>")
     end
   end
 
@@ -204,7 +204,7 @@ describe Application do
   end
 
   context "When calling POST /property it stores the information in a new object" do
-    it '#stores the information input' do 
+    it '#stores the information input' do
       post('/property', title: 'Palacio Real', description: 'Pasa una noche inolvidable con JuanCa', price_per_night: 10000)
       expect(last_response.status).to eq(200)
       expect(last_response.body).to include ('Palacio Real')
