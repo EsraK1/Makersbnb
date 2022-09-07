@@ -23,6 +23,9 @@ class Application < Sinatra::Base
 # We need to give the database name to the method `connect`.
   DatabaseConnection.connect('makersbnb_test')
 
+      get '/register' do
+        return erb(:register_page)
+      end
 
 
 
@@ -105,8 +108,7 @@ class Application < Sinatra::Base
 
 
 
-
-  get '/properties' do 
+  get '/properties' do
     repo = PropertyRepository.new
     @properties = repo.all
     return erb(:properties)

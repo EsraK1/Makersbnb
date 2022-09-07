@@ -40,6 +40,17 @@ describe Application do
     reset_property_table
   end
 
+  context "GET /register" do
+    it "displays registration page" do
+      response = get("/register")
+
+      expect(response.status).to eq(200)
+      expect(response.body).to include("<form method='POST' action='/register'>")
+      expect(response.body).to include("<input type='text' username='username'/>")
+      expect(response.body).to include("<input type='text' email_address='email_address'/>")
+      expect(response.body).to include("<input type='text' password='password'/>")
+    end
+  end
 
 
 
