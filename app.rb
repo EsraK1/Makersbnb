@@ -101,4 +101,4 @@ class Application < Sinatra::Base
       return erb(:property_info)
     end
   end
-end
+
