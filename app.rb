@@ -13,20 +13,24 @@ class Application < Sinatra::Base
         register Sinatra::Reloader
         also_reload 'lib/property_repository'
         also_reload 'lib/users_repository'
+        enable :sessions #This enables the cookie session
     end
 
+    #Home page
     get '/' do
         return erb(:index)
     end
 
 
-# We need to give the database name to the method `connect`.
-  DatabaseConnection.connect('makersbnb_test')
+    # We need to give the database name to the method `connect`
+    DatabaseConnection.connect('makersbnb_test')
 
+    #Register Page
     get '/register' do
         return erb(:register_page)
     end
 
+    #Register a new user
     post '/register' do
         repo = UserRepository.new
         user = User.new
@@ -40,113 +44,61 @@ class Application < Sinatra::Base
         return erb(:registration_successful)
     end
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  get '/properties' do
-    repo = PropertyRepository.new
-    @properties = repo.all
-    return erb(:properties)
+    #Login Page
+    get '/login' do 
+      return erb(:login)
+    end
+
+    #Login as a User
+    post '/login' do 
+      repo = UserRepository.new
+
+      email_address = params[:email_address]
+      password = params[:password]
+      user = repo.sign_in(email_address, password)
+      if user == nil 
+        session[:fail_message] = "Account does not exist"
+        return erb(:login_unsuccessful)
+
+      elsif user == false 
+        session[:fail_message] = "Incorrect password"
+        return erb(:login_unsuccessful)
+      end
+
+      #This is storing a User object into the session cookie, from the User login
+      session[:user] = user
+ 
+      return erb(:login_successful)
+    end
+
+    #Properties Listed on a webpage
+    get '/properties' do
+      repo = PropertyRepository.new
+      @properties = repo.all
+      return erb(:properties)
+    end
+
+    #Add a property 
+    get '/properties/new' do
+      return erb(:new_property)
+    end
+
+    #Find properties by ID
+    get '/properties/:id' do
+      @find_properties = PropertyRepository.new.find(params[:id])
+      return erb(:property_info)
+    end
+
+    #Adds a new property and takes you to its listing
+    post '/property' do
+      repo = PropertyRepository.new 
+      new_property = Property.new
+      new_property.title = params[:title]
+      new_property.description = params[:description]
+      new_property.price_per_night = params[:price_per_night]
+      repo.create(new_property)
+      @find_properties = repo.find(repo.all[-1].id)
+      return erb(:property_info)
+    end
   end
-
-  get '/properties/new' do
-    return erb(:new_property)
-  end
-
-  get '/properties/:id' do
-    @find_properties = PropertyRepository.new.find(params[:id])
-    return erb(:property_info)
-  end
-
-  post '/property' do
-    repo = PropertyRepository.new 
-    new_property = Property.new
-    new_property.title = params[:title]
-    new_property.description = params[:description]
-    new_property.price_per_night = params[:price_per_night]
-    repo.create(new_property)
-    @find_properties = repo.find(repo.all[-1].id)
-    return erb(:property_info)
-  end
-
 end

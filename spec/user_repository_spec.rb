@@ -108,4 +108,43 @@ RSpec.describe UserRepository do
             expect(all_users[0].password).to eq 'SkyBlue123'
         end
     end
+
+    context '#find_by_email' do 
+        it "find user using email address" do 
+            repo = UserRepository.new 
+
+            user = repo.find_by_email('JackJones@gmail.com')
+
+            expect(user.id).to eq 1
+            expect(user.username).to eq 'Jack'
+            expect(user.password).to eq 'SkyBlue123'
+        end
+    end
+
+    context '#sign_in' do 
+        it 'signs in successfully and returns a user object' do 
+            repo = UserRepository.new 
+
+            user = repo.sign_in('JackJones@gmail.com','SkyBlue123')
+
+            expect(user.id).to eq 1
+            expect(user.username).to eq 'Jack'
+        end
+
+        it ' returns null if email not in database' do 
+            repo = UserRepository.new 
+
+            user = repo.sign_in('Jack@gmail.com','Skye123')
+
+            expect(user).to eq nil
+        end
+
+        it 'returns false is password is incorrect' do 
+            repo = UserRepository.new 
+
+            user = repo.sign_in('JackJones@gmail.com','Skye123')
+
+            expect(user).to eq false
+        end
+    end
 end

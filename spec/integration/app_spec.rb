@@ -76,97 +76,47 @@ describe Application do
 
         expect(last_input.username).to eq("alex")
         expect(last_input.id).to eq(3)
-
     end
-
-
   end
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  context "#login check /login route" do 
+    it 'check to see if login route valid' do 
+      response = get("/login")
+
+      expect(response.status).to eq(200)
+      expect(response.body).to include("<label>Email address</label>")
+      response = get("/login")
+    end
+  end
+
+  context '#post login' do 
+    it "successfully signs in user and redirect to success page" do 
+      response = post("/login",
+        email_address:"JackJones@gmail.com",
+        password:"SkyBlue123")
+
+        expect(response.status).to eq(200)
+        expect(response.body).to include("<h1>You have logged in!</h1>")
+    end
+
+    it "sends user to unsuccessful page when account does not exist" do 
+      response = post("/login",
+      email_address:"Jack@gmail.com",
+      password:"Sky123")
+
+      expect(response.status).to eq(200)
+      expect(response.body).to include("Account does not exist")
+    end
+
+    it "sends user to unsuccessful page when invalid password" do 
+      response = post("/login",
+      email_address:"JackJones@gmail.com",
+      password:"Sky123")
+
+      expect(response.status).to eq(200)
+      expect(response.body).to include("Incorrect password")
+    end
+  end
 
 
   context "GET /properties" do
@@ -219,6 +169,5 @@ describe Application do
       expect(propertycheck.price_per_night).to eq (10000)
     end
   end
-
 end
 
