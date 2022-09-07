@@ -27,7 +27,7 @@ class Application < Sinatra::Base
 
     #Register Page
     get '/register' do
-        return erb(:register_page)
+        return erb(:'registration/register_page')
     end
 
     #Register a new user
@@ -41,12 +41,12 @@ class Application < Sinatra::Base
 
         repo.create(user)
 
-        return erb(:registration_successful)
+        return erb(:"registration/registration_successful")
     end
 
     #Login Page
     get '/login' do 
-      return erb(:login)
+      return erb(:'login/login')
     end
 
     #Login as a User
@@ -58,35 +58,35 @@ class Application < Sinatra::Base
       user = repo.sign_in(email_address, password)
       if user == nil 
         session[:fail_message] = "Account does not exist"
-        return erb(:login_unsuccessful)
+        return erb(:'login/login_unsuccessful')
 
       elsif user == false 
         session[:fail_message] = "Incorrect password"
-        return erb(:login_unsuccessful)
+        return erb(:'login/login_unsuccessful')
       end
 
       #This is storing a User object into the session cookie, from the User login
       session[:user] = user
- 
-      return erb(:login_successful)
+      
+      return erb(:'login/login_successful')
     end
 
     #Properties Listed on a webpage
     get '/properties' do
       repo = PropertyRepository.new
       @properties = repo.all
-      return erb(:properties)
+      return erb(:'properties/properties')
     end
 
     #Add a property 
     get '/properties/new' do
-      return erb(:new_property)
+      return erb(:'properties/new_property')
     end
 
     #Find properties by ID
     get '/properties/:id' do
       @find_properties = PropertyRepository.new.find(params[:id])
-      return erb(:property_info)
+      return erb(:'properties/property_info')
     end
 
     #Adds a new property and takes you to its listing
@@ -98,7 +98,7 @@ class Application < Sinatra::Base
       new_property.price_per_night = params[:price_per_night]
       repo.create(new_property)
       @find_properties = repo.find(repo.all[-1].id)
-      return erb(:property_info)
+      return erb(:'properties/property_info')
     end
   end
 
