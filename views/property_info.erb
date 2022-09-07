@@ -1,0 +1,15 @@
+<html>
+  <head></head>
+  <body>
+    <h1><%=@find_properties.title%></h1>
+    <p>
+      <%= "Property ID: #{@find_properties.id}"%><br>
+      <%= "Property: #{@find_properties.title}"%><br>
+      <%= "Property description: #{@find_properties.description}"%><br>
+      <%= "Property price per night: £#{@find_properties.price_per_night}"%><br>
+      <%= "Property owner: #{@find_properties.user_id}"%><br>
+    </p>
+  </body>
+  
+  <footer><a href="/properties">Go back to the full list of properties</a></footer>
+</html>

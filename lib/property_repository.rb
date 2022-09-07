@@ -37,6 +37,5 @@ class PropertyRepository
         DatabaseConnection.exec_params(sql, [property.title, property.description, property.price_per_night, property.user_id])
         return property
       end
-    
 
 end

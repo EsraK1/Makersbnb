@@ -111,4 +111,25 @@ class Application < Sinatra::Base
     @properties = repo.all
     return erb(:properties)
   end
+
+  get '/properties/new' do
+    return erb(:new_property)
+  end
+
+  get '/properties/:id' do
+    @find_properties = PropertyRepository.new.find(params[:id])
+    return erb(:property_info)
+  end
+
+  post '/property' do
+    repo = PropertyRepository.new 
+    new_property = Property.new
+    new_property.title = params[:title]
+    new_property.description = params[:description]
+    new_property.price_per_night = params[:price_per_night]
+    repo.create(new_property)
+    @find_properties = repo.find(repo.all[-1].id)
+    return erb(:property_info)
+  end
+
 end
