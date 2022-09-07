@@ -15,6 +15,11 @@ class Application < Sinatra::Base
         also_reload 'lib/users_repository'
     end
 
+home-page
+    get '/' do
+        return erb(:index)
+    end
+end
 
 
 # We need to give the database name to the method `connect`.
