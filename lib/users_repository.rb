@@ -104,4 +104,42 @@ class UserRepository
   
       # return nothing
     end
+
+    def sign_in(email_address, submitted_password)
+      user = find_by_email(email_address)
+  
+      return nil if user.nil?
+  
+      if user.password == submitted_password
+        # login success
+        return user
+      else
+        return false
+        # wrong password
+      end
+    end
+
+    def find_by_email(email_address)
+      sql = "SELECT * FROM users WHERE email_address = $1"
+
+      params = [email_address]
+
+      result = DatabaseConnection.exec_params(sql, params)
+
+      user = User.new
+
+      result.each do |record|
+
+        user.id = record['id'].to_i
+        user.username = record['username']
+        user.email_address = record['email_address']
+        user.password = record['password']
+      end
+
+      if user.username == nil
+        return nil 
+      end
+
+      return user
+    end
 end
