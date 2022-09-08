@@ -28,7 +28,8 @@ class Application < Sinatra::Base
     #Register Page
     get '/register' do
         if session[:user]==nil
-          return erb(:'registration/register_page')
+          #return erb(:'registration/register_page')
+          return erb(:'registration/register_page', { :locals => params, :layout => :the_layout_project })
         end
         redirect "/properties"
     end
@@ -42,15 +43,21 @@ class Application < Sinatra::Base
         user.email_address = params[:email_address]
         user.password = params[:password]
 
-        repo.create(user)
+        result = repo.register(user)
+        session[:register_message] = result
+        if result == "You have successfully registered!"
+          session[:user] = repo.find_by_email(user.email_address)
+        end
 
-        return erb(:"registration/registration_successful")
+        #return erb(:"registration/registration_successful")
+        return erb(:'registration/registration_result', { :locals => params, :layout => :the_layout_project })
     end
 
     #Login Page
     get '/login' do
       if session[:user]==nil
-        return erb(:'login/login')
+        #return erb(:'login/login')
+        return erb(:'login/login', { :locals => params, :layout => :the_layout_project })
       end
       redirect "/properties"
     end
@@ -62,19 +69,24 @@ class Application < Sinatra::Base
       email_address = params[:email_address]
       password = params[:password]
       user = repo.sign_in(email_address, password)
-      if user == nil
-        session[:fail_message] = "Account does not exist"
-        return erb(:'login/login_unsuccessful')
-
-      elsif user == false
-        session[:fail_message] = "Incorrect password"
-        return erb(:'login/login_unsuccessful')
+      case 
+        user
+      when nil
+        session[:login_message] = "Account does not exist"
+      when false
+        session[:login_message] = "Incorrect password"
+      else
+        session[:login_message] = "You have logged in!"
+        session[:user] = user
       end
 
-      #This is storing a User object into the session cookie, from the User login
-      session[:user] = user
+      return erb(:'login/login_result', { :locals => params, :layout => :the_layout_project })
 
-      return erb(:'login/login_successful')
+    end
+
+    get '/logout' do
+      session[:user] = nil
+      redirect '/login'
     end
 
 

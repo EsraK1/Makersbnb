@@ -142,4 +142,34 @@ class UserRepository
 
       return user
     end
+
+    def find_by_username(username)
+      sql = "SELECT * FROM users WHERE username = $1"
+      params = [username]
+      result = DatabaseConnection.exec_params(sql, params)
+      user = User.new
+      result.each do |record|
+        user.username = record['username']
+      end
+      if user.username == nil
+        return false 
+      else
+        return true
+      end
+    end
+
+    def register(user)
+      email_exists = find_by_email(user.email_address) != nil
+      if email_exists 
+        return "E-mail already registered"
+      end
+      username_exists = find_by_username(user.username)
+      if username_exists
+        return "Username is already taken"
+      else
+        create(user)
+        return "You have successfully registered!"
+      end
+    end
+
 end

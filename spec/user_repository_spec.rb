@@ -147,4 +147,73 @@ RSpec.describe UserRepository do
             expect(user).to eq false
         end
     end
+
+    context 'When checking that a user exists' do
+        it "#returns true if the user exists" do
+            repo = UserRepository.new
+            result = repo.find_by_username('Jack')
+            expect(result).to eq true
+        end
+        it "#returns false if the user doesn't exists" do
+            repo = UserRepository.new
+            result = repo.find_by_username('Jacob')
+            expect(result).to eq false
+        end
+    end
+
+    context "When registering a new user" do
+        it "#returns You have successfully registered! if there is no other user with the same details" do
+            repo = UserRepository.new
+            new_user = User.new
+            new_user.username = 'Malena Gracia'
+            new_user.email_address = 'malenagracia@gmail.com'
+            new_user.password = '1234'
+
+            result = repo.register(new_user)
+
+            all_users = repo.all
+
+            expect(all_users.length).to eq 3
+
+            expect(all_users.last.id).to eq  3
+            expect(all_users.last.username).to eq  'Malena Gracia'
+            expect(all_users.last.email_address).to eq  'malenagracia@gmail.com'
+            expect(all_users.last.password).to eq '1234'
+
+            expect(result).to eq "You have successfully registered!"
+        end
+
+        it "#returns can't register the new user if username already exists" do
+            repo = UserRepository.new
+            new_user = User.new
+            new_user.username = 'Jack'
+            new_user.email_address = 'jackgracia@gmail.com'
+            new_user.password = '1234'
+
+            result = repo.register(new_user)
+
+            all_users = repo.all
+
+            expect(result).to eq "Username is already taken"
+
+        end 
+
+        it "#returns can't register the new user if email address is already in use" do
+            repo = UserRepository.new
+            new_user = User.new
+            new_user.username = 'Jacob'
+            new_user.email_address = 'JackJones@gmail.com'
+            new_user.password = 'SkyBlu3'
+
+            result = repo.register(new_user)
+
+            all_users = repo.all
+
+            expect(result).to eq "E-mail already registered"
+        end
+    end
+
 end
+
+
+        
