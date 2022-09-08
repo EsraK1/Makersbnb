@@ -1,18 +1,8 @@
-<html>
-  <head>
-  <a href="/">Home</a><br>
-  </head>
-  <body>
-    <h1>List of properties</h1>
+<div>
+  <h1>List of properties</h1>
     <p>
       <% @properties.each do |property| %>
         <a href="/properties/<%=property.id%>"><%="#{property.title}"%></a><br>
       <% end %></b>
     </p>
-  </body>
-  <footer>
-    <a href="/properties/new">Add a new property</a><br>
-    <a href="/login">Login</a><br>
-    <a href="/register">Register</a><br>
-  </footer>
-</html>
+</div>

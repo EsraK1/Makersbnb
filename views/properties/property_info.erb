@@ -1,7 +1,5 @@
-<html>
-  <head></head>
-  <body>
-    <h1><%=@find_properties.title%></h1>
+<div>
+  <h1><%=@find_properties.title%></h1>
     <p>
       <%= "Property ID: #{@find_properties.id}"%><br>
       <%= "Property: #{@find_properties.title}"%><br>
@@ -10,7 +8,4 @@
       <%= "Property owner: #{@find_properties.user_id}"%><br>
       <%= "Property availability: #{@find_properties.start_date} - #{@find_properties.end_date}"%><br>
     </p>
-  </body>
-  
-  <footer><a href="/properties">Go back to the full list of properties</a></footer>
-</html>
+</div>
