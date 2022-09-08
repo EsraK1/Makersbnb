@@ -11,6 +11,8 @@ CREATE TABLE properties (
   title text,
   description text,
   price_per_night int,
+  start_date DATE,
+  end_date DATE,
 -- The foreign key name is always {user}_id
   user_id int,
   constraint fk_user foreign key(user_id)
