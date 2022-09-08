@@ -17,6 +17,8 @@ CREATE TABLE properties (
   title text,
   description text,
   price_per_night int,
+  start_date DATE,
+  end_date DATE,
 -- The foreign key name is always {user}_id
   user_id int,
   constraint fk_user foreign key(user_id)
@@ -34,6 +36,6 @@ TRUNCATE TABLE users, properties RESTART IDENTITY;
 INSERT INTO users(username, email_address, password) VALUES ('Jack', 'JackJones@gmail.com', 'SkyBlue123');
 INSERT INTO users (username, email_address, password) VALUES ('Skye', 'Skyhatesthis@ooutlook.com', 'Catperson339');
 
-INSERT INTO properties (title, description, price_per_night, user_id) VALUES ('Semi detached 2 bedroom house', 'Amazing for the weekend', 45, 2);
-INSERT INTO properties (title, description, price_per_night, user_id) VALUES ('Tiny home','Escape to a Romantic and Magical Hobbit Retreat', 90, 1);
+INSERT INTO properties (title, description, price_per_night,start_date, end_date, user_id) VALUES ('Semi detached 2 bedroom house', 'Amazing for the weekend', 45, '2022/09/10', '2022/09/20', 2);
+INSERT INTO properties (title, description, price_per_night,start_date, end_date, user_id) VALUES ('Tiny home','Escape to a Romantic and Magical Hobbit Retreat', 90, '2022/09/21', '2022/09/30', 1);
 

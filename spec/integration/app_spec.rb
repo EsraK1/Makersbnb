@@ -158,11 +158,13 @@ describe Application do
     it '#stores the information input' do
       new_user = User.new 
       new_user.id = 2
-      post('/property', {title: 'Palacio Real', description: 'Pasa una noche inolvidable con JuanCa', price_per_night: 10000}, {'rack.session' => {'user' => new_user}})
+      post('/property', {title: 'Palacio Real', description: 'Pasa una noche inolvidable con JuanCa', price_per_night: 10000, start_date: '2022-09-21', end_date: '2022-09-29'}, {'rack.session' => {'user' => new_user}})
       expect(last_response.status).to eq(200)
       expect(last_response.body).to include ('Palacio Real')
       expect(last_response.body).to include ('Pasa una noche inolvidable con JuanCa')
       expect(last_response.body).to include ('10000')
+      expect(last_response.body).to include ('2022-09-21')
+      expect(last_response.body).to include ('2022-09-29')
     end
     it '#adds it to the list of properties' do
       new_user = User.new 
