@@ -139,18 +139,23 @@ class Application < Sinatra::Base
     get '/properties' do
       repo = PropertyRepository.new
       @properties = repo.all
-      return erb(:'properties/properties')
+      return erb(:'properties/properties', { :locals => params, :layout => :the_layout_project })
+      #return erb(:'properties/properties')
     end
+
+    
 
     #Add a property
     get '/properties/new' do
-      return erb(:'properties/new_property')
+      #return erb(:'properties/new_property')
+      return erb(:'properties/new_property', { :locals => params, :layout => :the_layout_project })
     end
 
     #Find properties by ID
     get '/properties/:id' do
       @find_properties = PropertyRepository.new.find(params[:id])
-      return erb(:'properties/property_info')
+      #return erb(:'properties/property_info')
+      return erb(:'properties/property_info', { :locals => params, :layout => :the_layout_project })
     end
 
     #Adds a new property and takes you to its listing
