@@ -30,9 +30,9 @@ RSpec.describe UserRepository do
         expect(users[0].password).to eq 'SkyBlue123'
 
         expect(users[1].id).to eq 2
-        expect(users[1].username).to eq 'Skye'
-        expect(users[1].email_address).to eq 'Skyhatesthis@ooutlook.com'
-        expect(users[1].password).to eq 'Catperson339'
+        expect(users[1].username).to eq 'test'
+        expect(users[1].email_address).to eq 'test@test.com'
+        expect(users[1].password).to eq '1234'
         end
     end
 

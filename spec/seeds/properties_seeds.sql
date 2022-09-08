@@ -34,7 +34,6 @@ TRUNCATE TABLE users, properties RESTART IDENTITY;
 -- Our albums table has reference to a foreign key ('artist_id')
 -- because of that we do line 40 and line 49, user_id
 INSERT INTO users(username, email_address, password) VALUES ('Jack', 'JackJones@gmail.com', 'SkyBlue123');
-INSERT INTO users (username, email_address, password) VALUES ('Skye', 'Skyhatesthis@ooutlook.com', 'Catperson339');
 INSERT INTO users(username, email_address, password) VALUES ('test', 'test@test.com', '1234');
 
 INSERT INTO properties (title, description, price_per_night,start_date, end_date, user_id) VALUES ('Semi detached 2 bedroom house', 'Amazing for the weekend', 45, '2022/09/10', '2022/09/20', 2);
