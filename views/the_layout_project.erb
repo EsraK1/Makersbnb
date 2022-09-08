@@ -1,0 +1,22 @@
+<html>
+
+    <head></head>
+
+    <header>
+        <a href="/">Home</a><br>
+    </header>
+
+    <body>
+        <%= yield %>
+    </body>
+
+    <footer>
+        <a href="/properties">View properties</a><br>
+        <% if session[:user]!=nil %>
+            <a href="/properties/new">Add a new property</a><br>
+        <% else %>
+            <p><a href="/register">Register</a> or <a href="/login">Log in</a> if already registered</p>
+        <%end%>
+    </footer>
+
+</html>

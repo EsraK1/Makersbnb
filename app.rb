@@ -18,7 +18,7 @@ class Application < Sinatra::Base
 
     #Home page
     get '/' do
-        return erb(:index)
+        return erb(:index, { :locals => params, :layout => :the_layout_project })
     end
 
 
@@ -27,7 +27,10 @@ class Application < Sinatra::Base
 
     #Register Page
     get '/register' do
-        return erb(:'registration/register_page')
+        if session[:user]==nil
+          return erb(:'registration/register_page')
+        end
+        redirect "/properties"
     end
 
     #Register a new user
@@ -49,9 +52,7 @@ class Application < Sinatra::Base
       if session[:user]==nil
         return erb(:'login/login')
       end
-    repo = PropertyRepository.new
-    @properties = repo.all
-    return erb(:'properties/properties')
+      redirect "/properties"
     end
 
     #Login as a User
