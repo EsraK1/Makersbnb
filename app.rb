@@ -101,6 +101,8 @@ class Application < Sinatra::Base
       new_property.title = params[:title]
       new_property.description = params[:description]
       new_property.price_per_night = params[:price_per_night]
+      #adding user_id to a new listing from session
+      new_property.user_id = session[:user].id
       repo.create(new_property)
       @find_properties = repo.find(repo.all[-1].id)
       return erb(:'properties/property_info')
