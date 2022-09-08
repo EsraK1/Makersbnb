@@ -1,4 +1,4 @@
--- Write your SQL seed here. 
+-- Write your SQL seed here.
 DROP TABLE IF EXISTS properties;
 DROP TABLE IF EXISTS users;
 -- First, you'd need to truncate the table - this is so our table is emptied between each test run,
