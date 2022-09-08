@@ -45,31 +45,77 @@ class Application < Sinatra::Base
     end
 
     #Login Page
-    get '/login' do 
+    get '/login' do
       return erb(:'login/login')
     end
 
     #Login as a User
-    post '/login' do 
+    post '/login' do
       repo = UserRepository.new
 
       email_address = params[:email_address]
       password = params[:password]
       user = repo.sign_in(email_address, password)
-      if user == nil 
+      if user == nil
         session[:fail_message] = "Account does not exist"
         return erb(:'login/login_unsuccessful')
 
-      elsif user == false 
+      elsif user == false
         session[:fail_message] = "Incorrect password"
         return erb(:'login/login_unsuccessful')
       end
 
       #This is storing a User object into the session cookie, from the User login
       session[:user] = user
-      
+
       return erb(:'login/login_successful')
     end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     #Properties Listed on a webpage
     get '/properties' do
@@ -78,7 +124,7 @@ class Application < Sinatra::Base
       return erb(:'properties/properties')
     end
 
-    #Add a property 
+    #Add a property
     get '/properties/new' do
       return erb(:'properties/new_property')
     end
@@ -91,7 +137,7 @@ class Application < Sinatra::Base
 
     #Adds a new property and takes you to its listing
     post '/property' do
-      repo = PropertyRepository.new 
+      repo = PropertyRepository.new
       new_property = Property.new
       new_property.title = params[:title]
       new_property.description = params[:description]
