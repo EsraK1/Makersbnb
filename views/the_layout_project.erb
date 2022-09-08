@@ -1,0 +1,47 @@
+<html>
+
+    <head>
+        <title>MakersBNB</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+        <link href="<%= url('/styles.css') %>" rel="stylesheet" type="text/css" />
+    </head>
+
+    <header>
+        <a href="/"><div class="box-3">
+            <div class="btn btn-three">
+                <span>HOME</span>
+            </div>
+        </div></a>
+    <!--<a href="/"><button type="button">Home</button></a>-->
+    </header>
+
+    <body>
+        <%= yield %>
+    </body>
+
+    <footer>
+        <a href="/properties">View properties</a><br><br>
+        <% if session[:user]!=nil %>
+            <a href="/properties/new">Add a new property</a><br>
+            <a href="/logout"><button type="button">Log out</button></a>
+        <% else %>
+        <a href="/register"><div class="box-3">
+            <div class="btn btn-three">
+                <span>Register</span>
+            </div>
+        </div></a>
+        <br>
+        <a href="/login"><div class="box-3">
+            <div class="btn btn-three">
+                <span>Log in</span>
+            </div>
+        </div></a>
+
+            <!-- <a href="/register"><button type="button">Register</button></a> or 
+            <a href="/login"><button type="button">Sign in</button></a> if already registered</p>-->
+        <%end%>
+    </footer>
+
+</html>
