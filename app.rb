@@ -45,29 +45,34 @@ class Application < Sinatra::Base
     end
 
     #Login Page
-    get '/login' do 
-      return erb(:'login/login')
+    get '/login' do
+      if session[:user]==nil
+        return erb(:'login/login')
+      end
+    repo = PropertyRepository.new
+    @properties = repo.all
+    return erb(:'properties/properties')
     end
 
     #Login as a User
-    post '/login' do 
+    post '/login' do
       repo = UserRepository.new
 
       email_address = params[:email_address]
       password = params[:password]
       user = repo.sign_in(email_address, password)
-      if user == nil 
+      if user == nil
         session[:fail_message] = "Account does not exist"
         return erb(:'login/login_unsuccessful')
 
-      elsif user == false 
+      elsif user == false
         session[:fail_message] = "Incorrect password"
         return erb(:'login/login_unsuccessful')
       end
 
       #This is storing a User object into the session cookie, from the User login
       session[:user] = user
-      
+
       return erb(:'login/login_successful')
     end
 
@@ -78,7 +83,7 @@ class Application < Sinatra::Base
       return erb(:'properties/properties')
     end
 
-    #Add a property 
+    #Add a property
     get '/properties/new' do
       return erb(:'properties/new_property')
     end
@@ -91,11 +96,13 @@ class Application < Sinatra::Base
 
     #Adds a new property and takes you to its listing
     post '/property' do
-      repo = PropertyRepository.new 
+      repo = PropertyRepository.new
       new_property = Property.new
       new_property.title = params[:title]
       new_property.description = params[:description]
       new_property.price_per_night = params[:price_per_night]
+      #adding user_id to a new listing from session
+      new_property.user_id = session[:user].id
       repo.create(new_property)
       @find_properties = repo.find(repo.all[-1].id)
       return erb(:'properties/property_info')

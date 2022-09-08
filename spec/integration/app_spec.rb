@@ -1,6 +1,7 @@
 require "spec_helper"
 require "rack/test"
 require "users_repository"
+require "users"
 require_relative '../../app.rb'
 
 
@@ -155,14 +156,18 @@ describe Application do
 
   context "When calling POST /property it stores the information in a new object" do
     it '#stores the information input' do
-      post('/property', title: 'Palacio Real', description: 'Pasa una noche inolvidable con JuanCa', price_per_night: 10000)
+      new_user = User.new 
+      new_user.id = 2
+      post('/property', {title: 'Palacio Real', description: 'Pasa una noche inolvidable con JuanCa', price_per_night: 10000}, {'rack.session' => {'user' => new_user}})
       expect(last_response.status).to eq(200)
       expect(last_response.body).to include ('Palacio Real')
       expect(last_response.body).to include ('Pasa una noche inolvidable con JuanCa')
       expect(last_response.body).to include ('10000')
     end
     it '#adds it to the list of properties' do
-      post('/property', title: 'Palacio Real', description: 'Pasa una noche inolvidable con JuanCa', price_per_night: 10000)
+      new_user = User.new 
+      new_user.id = 2
+      post('/property', {title: 'Palacio Real', description: 'Pasa una noche inolvidable con JuanCa', price_per_night: 10000}, {'rack.session' => {'user' => new_user}})
       propertycheck = PropertyRepository.new.all[-1]
       expect(propertycheck.title).to eq ('Palacio Real')
       expect(propertycheck.description).to eq ('Pasa una noche inolvidable con JuanCa')
