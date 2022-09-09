@@ -1,8 +1,15 @@
 <div class="infocontainter">
+<center>
   <h4>List of properties</h4>
+  <center>
     <p>
       <% @properties.each do |property| %>
+        <br>
         <a href="/properties/<%=property.id%>"><%="#{property.title}"%></a><br>
+        <%="£#{property.price_per_night} Per Night "%></a><br>
+        <%="Availability #{property.start_date} -- #{property.end_date} "%></a><br>
+        </br>
       <% end %></b>
+      </center>
     </p>
 </div>
