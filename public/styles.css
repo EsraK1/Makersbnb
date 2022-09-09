@@ -108,9 +108,10 @@ footer{
 }
 
 #buttonsdiv2{
+  float: right;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  /*justify-content: center;*/
+  /*align-items: center;*/
   */border: 3px solid green;
   /*flex-flow: column;*/
   color: white;
