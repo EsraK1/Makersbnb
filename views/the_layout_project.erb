@@ -12,38 +12,41 @@
     </head>
 
     <header>
-        <div class="header">
-            <a href="/" class="logo"><h1 id="theader">MakersBNB</h1></a>
-            <div class="header-right">
-                <div id="buttonsdiv2">
-                    <% if session[:user]!=nil %>
-                        <div class="svg-wrapper">
-                            <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
+        <div id="allheader">
+            <div class="header">
+                <a href="/" class="logo"><h1 id="theader">MakersBNB</h1></a>
+                <div class="header-right">
+                </div>
+            
+            <div id="buttonsdiv2">
+                <% if session[:user]!=nil %>
+                    <div class="svg-wrapper">
+                        <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
                             <rect id="shape" height="40" width="150" />
-                            <div id="text">
+                            <div id="text" style="margin: -20px;">
                                 <a href="/logout" style="color:white;"><span class="spot"></span>Log out</a>
                             </div>
-                            </svg>
-                        </div>
-                    <%else%>
-                        <div class="svg-wrapper">
-                            <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
-                                <rect id="shape" height="40" width="150" />
-                                <div id="text">
-                                    <a href="/register" style="color:white;"><span class="spot"></span>Register</a>
-                                </div>
-                            </svg>
-                        </div>
-                        <div class="svg-wrapper">
-                            <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
-                                <rect id="shape" height="40" width="150" />
-                                <div id="text">
-                                    <a href="/login" style="color:white;"><span class="spot"></span>Sign in</a>
-                                </div>
-                            </svg>
-                        </div>
-                    <% end %>
-        </div>
+                        </svg>
+                    </div>
+                <%else%>
+                    <div class="svg-wrapper">
+                        <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
+                            <rect id="shape" height="40" width="150" />
+                            <div id="text" style="margin: -20px;">
+                                <a href="/register" style="color:white;"><span class="spot"></span>Register</a>
+                            </div>
+                        </svg>
+                    </div>
+                    <div class="svg-wrapper">
+                        <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
+                            <rect id="shape" height="40" width="150" />
+                            <div id="text" style="margin: -20px;">
+                                <a href="/login" style="color:white;"><span class="spot"></span>Sign in</a>
+                            </div>
+                        </svg>
+                    </div>
+                <% end %>
+            </div>
             </div>
         </div>
     </header>
