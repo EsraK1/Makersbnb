@@ -49,7 +49,7 @@ describe Application do
       expect(response.status).to eq(200)
       expect(response.body).to include("<form method='POST' action='/register'>")
       expect(response.body).to include("<input type='text' name='username'/>")
-      expect(response.body).to include("<input type='text' name='email_address'/>")
+      expect(response.body).to include("<input type='email' name='email_address'/>")
       expect(response.body).to include("<input type='password' name='password'/>")
     end
   end
