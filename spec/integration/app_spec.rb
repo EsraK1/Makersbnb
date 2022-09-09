@@ -62,7 +62,7 @@ describe Application do
       password:"xela")
 
       expect(response.status).to eq(200)
-      expect(response.body).to include("<h1>You have successfully registered!</h1>")
+      expect(response.body).to include("<h4>You have successfully registered!</h4>")
       response = get("/register")
     end
 
@@ -97,7 +97,7 @@ describe Application do
         password:"SkyBlue123")
 
         expect(response.status).to eq(200)
-        expect(response.body).to include("<h1>You have logged in!</h1>")
+        expect(response.body).to include("<h4>You have logged in!</h4>")
     end
 
     it "sends user to unsuccessful page when account does not exist" do 
@@ -150,7 +150,7 @@ describe Application do
       get("/properties/new")
       expect(last_response.status).to eq(200)
       expect(last_response.body).to include ('<form method="POST" action="/property">')
-      expect(last_response.body).to include ('<h1>Add your new property on the market</h1>')
+      expect(last_response.body).to include ('<h4>Add your new property on the market</h4>')
     end
   end
 
