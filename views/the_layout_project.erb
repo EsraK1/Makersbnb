@@ -19,6 +19,25 @@
                 </div>
             
             <div id="buttonsdiv2">
+                <div class="svg-wrapper">
+                    <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
+                        <rect id="shape" height="40" width="150" />
+                        <div id="text" style="margin: -20px;">
+                            <a href="/properties" style="color:white;"><span class="spot"></span>View properties</a>
+                        </div>
+                    </svg>
+                </div>
+                <!--Next button -->
+                <% if session[:user]!=nil %>
+                    <div class="svg-wrapper">
+                        <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
+                            <rect id="shape" height="40" width="150" />
+                            <div id="text" style="margin: -20px;">
+                                <a href="/properties/new" style="color:white;"><span class="spot"></span>New property</a>
+                            </div>
+                        </svg>
+                    </div>
+                <%end%>
                 <% if session[:user]!=nil %>
                     <div class="svg-wrapper">
                         <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
@@ -56,7 +75,7 @@
 
         <%= yield %>
 
-        <div id="buttonsdiv">
+        <!--<div id="buttonsdiv">
             <div class="svg-wrapper">
             <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
                 <rect id="shape" height="40" width="150" />
@@ -64,9 +83,9 @@
                 <a href="/properties"><span class="spot"></span>View properties</a>
                 </div>
             </svg>
-            </div>
+            </div> -->
             <!--Next button -->
-            <% if session[:user]!=nil %>
+            <!-- <% if session[:user]!=nil %>
                 <div class="svg-wrapper">
                     <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
                     <rect id="shape" height="40" width="150" />
@@ -75,19 +94,32 @@
                     </svg>
                 </div>
             <%end%>
-        </div>
+        </div> -->
 
 
     </body>
 
     <footer>
+        
+        <div id="fcontainer">
+            <a class="afooter" href="/properties"><p>View properties</p></a>
+            <% if session[:user]!=nil %>
+                <a class="afooter" href="/properties/new"><p>| Add a new property |</p></a>
+                <a class="afooter" href="/logout"><p>Log out</p></a>
+            <% else %>
+                <a class="afooter" href="/register"><p>| Register |</p></a>
+                <a class="afooter" href="/login"><p>Sign in</p></a>
+            <%end%>
+            </div>
+        </div>
+
         <!--<div id="fcontainer">
             <a href="/properties"><button type="button">View properties</button></a><br><br>
             <% if session[:user]!=nil %>
-                <a href="/properties/new"><button type="button">Add a new property</button></a>
+                <a href="/properties/new"><button type="button">| Add a new property |</button></a>
                 <a href="/logout"><button type="button">Log out</button></a>
             <% else %>
-                <a href="/register"><button type="button">Register</button></a>
+                <a href="/register"><button type="button">| Register |</button></a>
                 <a href="/login"><button type="button">Sign in</button></a>
             <%end%>
         </div>
