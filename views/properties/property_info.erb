@@ -1,7 +1,7 @@
 <div>
-  <h1><%=@find_properties.title%></h1>
+  <h4><%=@find_properties.title%></h4>
     <p>
-      <%= "Property ID: #{@find_properties.id}"%><br>
+      <b>Property ID:</b><%="#{@find_properties.id}"%><br>
       <%= "Property: #{@find_properties.title}"%><br>
       <%= "Property description: #{@find_properties.description}"%><br>
       <%= "Property price per night: £#{@find_properties.price_per_night}"%><br>

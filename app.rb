@@ -171,7 +171,8 @@ class Application < Sinatra::Base
       new_property.user_id = session[:user].id
       repo.create(new_property)
       @find_properties = repo.find(repo.all[-1].id)
-      return erb(:'properties/property_info')
+      #return erb(:'properties/property_info')
+      return erb(:'properties/property_info', { :locals => params, :layout => :the_layout_project })
     end
   end
 

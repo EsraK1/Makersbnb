@@ -5,43 +5,90 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
-        <link href="<%= url('/styles.css') %>" rel="stylesheet" type="text/css" />
+        <link href="<%= url('/styles.css') %>" rel="stylesheet" type="text/css"/>
+        <link href="<%= url('/buttons_css.css') %>" rel="stylesheet" type="text/css"/>
+        <link href="<%= url('/header_css.css') %>" rel="stylesheet" type="text/css"/>
+        
     </head>
 
     <header>
-        <a href="/"><div class="box-3">
-            <div class="btn btn-three">
-                <span>HOME</span>
+        <div class="header">
+            <a href="/" class="logo"><h1 id="theader">MakersBNB</h1></a>
+            <div class="header-right">
+                <div id="buttonsdiv2">
+                    <% if session[:user]!=nil %>
+                        <div class="svg-wrapper">
+                            <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
+                            <rect id="shape" height="40" width="150" />
+                            <div id="text">
+                                <a href="/logout" style="color:white;"><span class="spot"></span>Log out</a>
+                            </div>
+                            </svg>
+                        </div>
+                    <%else%>
+                        <div class="svg-wrapper">
+                            <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
+                                <rect id="shape" height="40" width="150" />
+                                <div id="text">
+                                    <a href="/register" style="color:white;"><span class="spot"></span>Register</a>
+                                </div>
+                            </svg>
+                        </div>
+                        <div class="svg-wrapper">
+                            <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
+                                <rect id="shape" height="40" width="150" />
+                                <div id="text">
+                                    <a href="/login" style="color:white;"><span class="spot"></span>Sign in</a>
+                                </div>
+                            </svg>
+                        </div>
+                    <% end %>
+        </div>
             </div>
-        </div></a>
-    <!--<a href="/"><button type="button">Home</button></a>-->
+        </div>
     </header>
 
     <body>
+
+
         <%= yield %>
+
+        <div id="buttonsdiv">
+            <div class="svg-wrapper">
+            <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
+                <rect id="shape" height="40" width="150" />
+                <div id="text">
+                <a href="/properties"><span class="spot"></span>View properties</a>
+                </div>
+            </svg>
+            </div>
+            <!--Next button -->
+            <% if session[:user]!=nil %>
+                <div class="svg-wrapper">
+                    <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
+                    <rect id="shape" height="40" width="150" />
+                    <div id="text">
+                    <a href="/properties/new"><span class="spot"></span>New property</a>
+                    </svg>
+                </div>
+            <%end%>
+        </div>
+
+
     </body>
 
     <footer>
-        <a href="/properties">View properties</a><br><br>
-        <% if session[:user]!=nil %>
-            <a href="/properties/new">Add a new property</a><br>
-            <a href="/logout"><button type="button">Log out</button></a>
-        <% else %>
-        <a href="/register"><div class="box-3">
-            <div class="btn btn-three">
-                <span>Register</span>
-            </div>
-        </div></a>
-        <br>
-        <a href="/login"><div class="box-3">
-            <div class="btn btn-three">
-                <span>Log in</span>
-            </div>
-        </div></a>
-
-            <!-- <a href="/register"><button type="button">Register</button></a> or 
-            <a href="/login"><button type="button">Sign in</button></a> if already registered</p>-->
-        <%end%>
+        <!--<div id="fcontainer">
+            <a href="/properties"><button type="button">View properties</button></a><br><br>
+            <% if session[:user]!=nil %>
+                <a href="/properties/new"><button type="button">Add a new property</button></a>
+                <a href="/logout"><button type="button">Log out</button></a>
+            <% else %>
+                <a href="/register"><button type="button">Register</button></a>
+                <a href="/login"><button type="button">Sign in</button></a>
+            <%end%>
+        </div>
+        </div>-->
     </footer>
 
 </html>
